@@ -442,7 +442,7 @@ def return_evaluate_network_data(
                         np.round(trainerrorpcutoff, 2),
                         "pixels. Test error:",
                         np.round(testerrorpcutoff, 2),
-                        "pixels",
+                        "pixels",comparisonbodyparts
                     )
                     print("Snapshot", Snapshots[snapindex])
 
