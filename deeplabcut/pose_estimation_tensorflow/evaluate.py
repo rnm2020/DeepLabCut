@@ -448,6 +448,7 @@ def return_evaluate_network_data(
 
                 r = [
                     trainingsiterations,
+                    comparisonbodyparts,
                     int(100 * trainFraction),
                     shuffle,
                     np.round(trainerror, 2),
@@ -855,6 +856,7 @@ def evaluate_network(
                             cfg["pcutoff"],
                             np.round(trainerrorpcutoff, 2),
                             np.round(testerrorpcutoff, 2),
+                            comparisonbodyparts,
                         ]
                         final_result.append(results)
 
@@ -967,14 +969,19 @@ def make_results_file(final_result, evaluationfolder, DLCscorer):
         "p-cutoff used",
         "Train error with p-cutoff",
         "Test error with p-cutoff",
+        "comparisonbodyparts"
     ]
     df = pd.DataFrame(final_result, columns=col_names)
     output_path = os.path.join(str(evaluationfolder), DLCscorer + "-results.csv")
     if os.path.exists(output_path):
         temp = pd.read_csv(output_path, index_col=0)
         df = pd.concat((df, temp)).reset_index(drop=True)
+    df.to_csv(output_path,mode= 'a')
+    else: # else it exists so append without writing the header
+        df.to_csv('filename.mode='a', header=False)
 
-    df.to_csv(output_path,mode='a', header=False)
+
+    #df.to_csv(output_path,mode='a')
 
 
 if __name__ == "__main__":
