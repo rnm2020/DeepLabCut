@@ -976,10 +976,10 @@ def make_results_file(final_result, evaluationfolder, DLCscorer):
     if os.path.exists(output_path):
         temp = pd.read_csv(output_path, index_col=0)
         df = pd.concat((df, temp)).reset_index(drop=True)
-    df.to_csv(output_path,mode= 'a')
-    else: # else it exists so append without writing the header
-        df.to_csv('filename.mode='a', header=False)
-
+        df.to_csv(output_path,mode='a')
+        #df.to_csv(output_path,mode= 'a')
+    
+ 
 
     #df.to_csv(output_path,mode='a')
 
